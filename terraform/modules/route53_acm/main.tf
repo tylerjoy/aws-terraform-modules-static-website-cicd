@@ -17,7 +17,7 @@ resource "aws_route53_record" "dns_validation" {
   name            = tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_name
   records         = [tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_value]
   type            = tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_type
-  zone_id         = data.aws_route53_zone.dns_zone_id
+  zone_id         = data.aws_route53_zone.dns_zone.zone_id
   ttl             = var.dns_record.ttl
 }
 
