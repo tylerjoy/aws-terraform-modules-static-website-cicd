@@ -1,3 +1,8 @@
+# Create the Route 53 hosted zone for the domain
+resource "aws_route53_zone" "dns_zone" {
+  name = var.root_domain
+}
+
 data "aws_route53_zone" "dns_zone" {
   name         = var.root_domain
   private_zone = false
