@@ -3,10 +3,10 @@ resource "aws_route53_zone" "dns_zone" {
   name = var.root_domain
 }
 
-data "aws_route53_zone" "dns_zone" {
-  name         = var.root_domain
-  private_zone = false
-}
+# data "aws_route53_zone" "dns_zone" {
+#   name         = var.root_domain
+#   private_zone = false
+# }
 
 resource "aws_acm_certificate" "ssl_certificate" {
   domain_name               = var.root_domain
@@ -22,7 +22,7 @@ resource "aws_route53_record" "dns_validation" {
   name            = tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_name
   records         = [tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_value]
   type            = tolist(aws_acm_certificate.ssl_certificate.domain_validation_options)[0].resource_record_type
-  zone_id         = data.aws_route53_zone.dns_zone.zone_id
+  zone_id         = aws_route53_zone.dns_zone.zone_id
   ttl             = var.dns_record_ttl
 }
 
