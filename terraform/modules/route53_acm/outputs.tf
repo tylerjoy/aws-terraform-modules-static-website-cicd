@@ -7,3 +7,8 @@ output "aws_route53_zone_id" {
   description = "The ID of the Route53 Zone"
   value = data.aws_route53_zone.dns_zone.zone_id
 }
+
+output "root_domain" {
+  description = "The Root Domain Name for the Website"
+  value = var.root_domain
+}
